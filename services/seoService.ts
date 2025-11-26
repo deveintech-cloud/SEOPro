@@ -1,5 +1,5 @@
 
-import { KeywordData, BacklinkData, SeoAuditResult, AuditIssue, ReadabilityResult } from '../types';
+import { KeywordData, BacklinkData, SeoAuditResult, AuditIssue, ReadabilityResult, ReferrerData } from '../types';
 
 // Stop words to exclude from analysis
 const STOP_WORDS = new Set([
@@ -132,6 +132,27 @@ export const generateMockBacklinkData = (domain: string): BacklinkData => {
   const totalBacklinks = (seed % 50000) + 100;
   const referringDomains = Math.floor(totalBacklinks / ((seed % 20) + 5));
   
+  // Mock Referrers
+  const potentialReferrers = [
+    'wikipedia.org', 'nytimes.com', 'medium.com', 'reddit.com', 'github.com', 
+    'stackoverflow.com', 'forbes.com', 'techcrunch.com', 'hubspot.com', 'moz.com'
+  ];
+  
+  const topReferrers: ReferrerData[] = [];
+  const numReferrers = 5;
+  for (let i = 0; i < numReferrers; i++) {
+    const refSeed = seed + i;
+    const totalLinks = (refSeed % 200) + 10;
+    const dofollowCount = Math.floor(totalLinks * ((refSeed % 100) / 100));
+    
+    topReferrers.push({
+      domain: potentialReferrers[(seed + i) % potentialReferrers.length],
+      authority: 90 - (refSeed % 40),
+      dofollowCount,
+      nofollowCount: totalLinks - dofollowCount
+    });
+  }
+
   return {
     domainAuthority,
     pageAuthority,
@@ -145,7 +166,8 @@ export const generateMockBacklinkData = (domain: string): BacklinkData => {
       { text: "website", percent: 10 },
       { text: "read more", percent: 5 },
       { text: domain.split('.')[0], percent: 35 }
-    ]
+    ],
+    topReferrers
   };
 };
 

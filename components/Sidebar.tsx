@@ -23,10 +23,10 @@ const Sidebar: React.FC<SidebarProps> = ({ currentTool, onNavigate, isOpen, onCl
       )}
 
       <aside 
-        className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-slate-900 text-slate-100 flex flex-col transition-transform duration-300 z-30 overflow-y-auto
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
+        className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-slate-900 dark:bg-slate-950 text-slate-100 flex flex-col transition-transform duration-300 z-30 overflow-y-auto
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 border-r border-slate-800 dark:border-slate-800`}
       >
-        <div className="p-6 border-b border-slate-700">
+        <div className="p-6 border-b border-slate-800">
           <h1 
             onClick={() => onNavigate(ToolId.DASHBOARD)}
             className="text-2xl font-bold bg-gradient-to-r from-brand-500 to-indigo-400 bg-clip-text text-transparent cursor-pointer"
@@ -75,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentTool, onNavigate, isOpen, onCl
         </div>
 
         {/* Affiliate Section */}
-        <div className="p-4 border-t border-slate-700 bg-slate-800/50">
+        <div className="p-4 border-t border-slate-800 bg-slate-800/50">
           <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Recommended Tools</h3>
           <div className="space-y-3">
             {AFFILIATE_LINKS.slice(0, 2).map((link, idx) => (
@@ -84,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentTool, onNavigate, isOpen, onCl
                 href={link.url}
                 className="flex items-center gap-3 p-2 rounded hover:bg-slate-700 transition-colors group"
               >
-                <div className="w-8 h-8 bg-slate-600 rounded-md overflow-hidden shrink-0">
+                <div className="w-8 h-8 bg-slate-700 rounded-md overflow-hidden shrink-0">
                   <img src={link.icon} alt={link.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100" />
                 </div>
                 <div className="flex-1 overflow-hidden">

@@ -46,11 +46,11 @@ const Contact: React.FC<ContactProps> = ({ onNavigate }) => {
   if (success) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-4 animate-in fade-in zoom-in duration-300">
-        <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+        <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mb-4">
           <CheckCircle size={40} />
         </div>
-        <h2 className="text-3xl font-bold text-slate-900">Message Sent!</h2>
-        <p className="text-slate-600">Thank you for reaching out. We'll get back to you shortly.</p>
+        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Message Sent!</h2>
+        <p className="text-slate-600 dark:text-slate-300">Thank you for reaching out. We'll get back to you shortly.</p>
         <p className="text-sm text-slate-400">Redirecting to Dashboard...</p>
       </div>
     );
@@ -59,52 +59,52 @@ const Contact: React.FC<ContactProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-2xl mx-auto space-y-8 py-8">
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold text-slate-900">Get in Touch</h1>
-        <p className="text-slate-600">Have questions about our SEO tools, pricing, or enterprise solutions? We'd love to hear from you.</p>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Get in Touch</h1>
+        <p className="text-slate-600 dark:text-slate-400">Have questions about our SEO tools, pricing, or enterprise solutions? We'd love to hear from you.</p>
       </div>
 
-      <div className="bg-white p-8 rounded-xl shadow-lg border border-slate-100">
+      <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label htmlFor="firstName" className="text-sm font-medium text-slate-700">First Name</label>
+              <label htmlFor="firstName" className="text-sm font-medium text-slate-700 dark:text-slate-300">First Name</label>
               <input 
                 type="text" 
                 name="firstName"
                 id="firstName"
                 required
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="lastName" className="text-sm font-medium text-slate-700">Last Name</label>
+              <label htmlFor="lastName" className="text-sm font-medium text-slate-700 dark:text-slate-300">Last Name</label>
               <input 
                 type="text" 
                 name="lastName"
                 id="lastName"
                 required
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium text-slate-700">Email Address</label>
+            <label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
             <input 
               type="email" 
               name="email"
               id="email"
               required
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
             />
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="subject" className="text-sm font-medium text-slate-700">Subject</label>
+            <label htmlFor="subject" className="text-sm font-medium text-slate-700 dark:text-slate-300">Subject</label>
             <select 
               name="subject"
               id="subject"
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white"
+              className="w-full px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white dark:bg-slate-800 dark:text-white"
             >
               <option value="General Inquiry">General Inquiry</option>
               <option value="Professional Plan Trial">Professional Plan - 7 Day Trial</option>
@@ -115,13 +115,13 @@ const Contact: React.FC<ContactProps> = ({ onNavigate }) => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-medium text-slate-700">Message</label>
+            <label htmlFor="message" className="text-sm font-medium text-slate-700 dark:text-slate-300">Message</label>
             <textarea 
               name="message"
               id="message"
               required
               rows={5}
-              className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
+              className="w-full px-4 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none bg-transparent dark:text-white"
               placeholder="How can we help you today?"
             ></textarea>
           </div>

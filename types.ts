@@ -21,7 +21,8 @@ export enum ToolId {
   CONTACT = 'contact',
   PRIVACY = 'privacy',
   TERMS = 'terms',
-  UPGRADE = 'upgrade'
+  UPGRADE = 'upgrade',
+  BLOG_POST = 'blog-post'
 }
 
 export interface AffiliateLink {
@@ -41,6 +42,13 @@ export interface MetaTagState {
   ogImage: string;
 }
 
+export interface ReferrerData {
+  domain: string;
+  authority: number;
+  dofollowCount: number;
+  nofollowCount: number;
+}
+
 export interface BacklinkData {
   domainAuthority: number;
   pageAuthority: number;
@@ -49,6 +57,7 @@ export interface BacklinkData {
   dofollowRatio: number;
   spamScore: number;
   topAnchors: { text: string; percent: number }[];
+  topReferrers: ReferrerData[];
 }
 
 export interface AuditIssue {
@@ -80,4 +89,15 @@ export interface ReadabilityResult {
   complexWords: number;
   avgSentenceLength: number;
   recommendations: string[];
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  date: string;
+  readTime: string;
+  description: string;
+  category: string;
+  author: string;
+  content: string;
 }

@@ -35,14 +35,14 @@ const KeywordDensity: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-slate-800">Keyword Density Checker</h2>
-          <span className="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">Free Tool</span>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Keyword Density Checker</h2>
+          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">Free Tool</span>
         </div>
         
         <textarea
-          className="w-full h-48 p-4 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none resize-none text-slate-700 placeholder-slate-400 transition-shadow"
+          className="w-full h-48 p-4 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none resize-none text-slate-700 dark:text-slate-200 placeholder-slate-400 bg-transparent transition-shadow"
           placeholder="Paste your content here to analyze keyword density..."
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -51,13 +51,13 @@ const KeywordDensity: React.FC = () => {
         <div className="mt-4 flex flex-wrap gap-3">
           <button
             onClick={handleAnalyze}
-            className="px-6 py-2 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition-colors shadow-sm shadow-brand-200"
+            className="px-6 py-2 bg-brand-600 hover:bg-brand-700 text-white font-medium rounded-lg transition-colors shadow-sm shadow-brand-200 dark:shadow-none"
           >
             Analyze Text
           </button>
           <button
             onClick={() => setText('')}
-            className="px-6 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium rounded-lg transition-colors"
+            className="px-6 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 font-medium rounded-lg transition-colors"
           >
             Clear
           </button>
@@ -66,7 +66,7 @@ const KeywordDensity: React.FC = () => {
              <button
              onClick={handleAiAnalyze}
              disabled={loadingAi}
-             className="ml-auto px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-medium rounded-lg transition-colors flex items-center gap-2"
+             className="ml-auto px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 font-medium rounded-lg transition-colors flex items-center gap-2"
            >
              <Sparkles size={16} />
              {loadingAi ? 'Asking AI...' : 'Get AI Optimization Tips'}
@@ -76,12 +76,12 @@ const KeywordDensity: React.FC = () => {
       </div>
 
       {aiTip && (
-        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-100 animate-in fade-in slide-in-from-bottom-4">
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-800 p-6 rounded-xl border border-indigo-100 dark:border-indigo-900 animate-in fade-in slide-in-from-bottom-4">
           <div className="flex items-start gap-3">
-            <Sparkles className="text-indigo-600 mt-1 flex-shrink-0" size={20} />
+            <Sparkles className="text-indigo-600 dark:text-indigo-400 mt-1 flex-shrink-0" size={20} />
             <div>
-              <h3 className="font-semibold text-indigo-900 mb-2">AI Optimization Suggestions</h3>
-              <p className="text-indigo-800 leading-relaxed text-sm whitespace-pre-wrap">{aiTip}</p>
+              <h3 className="font-semibold text-indigo-900 dark:text-indigo-300 mb-2">AI Optimization Suggestions</h3>
+              <p className="text-indigo-800 dark:text-indigo-200 leading-relaxed text-sm whitespace-pre-wrap">{aiTip}</p>
             </div>
           </div>
         </div>
@@ -90,15 +90,15 @@ const KeywordDensity: React.FC = () => {
       {results && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-8">
           {/* Main Chart */}
-          <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+          <div className="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="font-semibold text-slate-800">Top Keyword Distribution</h3>
-              <div className="text-sm text-slate-500">Total Words: <span className="font-bold text-slate-900">{results.totalWords}</span></div>
+              <h3 className="font-semibold text-slate-800 dark:text-white">Top Keyword Distribution</h3>
+              <div className="text-sm text-slate-500 dark:text-slate-400">Total Words: <span className="font-bold text-slate-900 dark:text-white">{results.totalWords}</span></div>
             </div>
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={results.keywords.slice(0, 10)}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" className="dark:opacity-20" />
                   <XAxis dataKey="word" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
                   <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
                   <Tooltip 
@@ -112,35 +112,35 @@ const KeywordDensity: React.FC = () => {
           </div>
 
           {/* Detailed List */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col h-[24rem]">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col h-[24rem]">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="font-semibold text-slate-800">Keyword Stats</h3>
+              <h3 className="font-semibold text-slate-800 dark:text-white">Keyword Stats</h3>
               <div className="flex gap-2">
-                <button onClick={copyToClipboard} className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded transition-colors" title="Copy to Clipboard">
+                <button onClick={copyToClipboard} className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors" title="Copy to Clipboard">
                   <Copy size={16} />
                 </button>
-                <button className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded transition-colors" title="Export CSV">
+                <button className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors" title="Export CSV">
                   <Download size={16} />
                 </button>
               </div>
             </div>
             <div className="overflow-y-auto flex-1 pr-2 space-y-3">
-              <div className="grid grid-cols-4 text-xs font-semibold text-slate-400 pb-2 border-b border-slate-100">
+              <div className="grid grid-cols-4 text-xs font-semibold text-slate-400 pb-2 border-b border-slate-100 dark:border-slate-700">
                 <span className="col-span-2">Keyword</span>
                 <span className="text-right">Count</span>
                 <span className="text-right">Density</span>
               </div>
               {results.keywords.map((k, idx) => (
-                <div key={idx} className="grid grid-cols-4 text-sm items-center hover:bg-slate-50 p-1 rounded">
-                  <span className="col-span-2 text-slate-700 font-medium truncate" title={k.word}>{k.word}</span>
-                  <span className="text-right text-slate-600">{k.count}</span>
-                  <span className={`text-right font-medium ${k.density > 2.5 ? 'text-amber-500' : 'text-emerald-600'}`}>
+                <div key={idx} className="grid grid-cols-4 text-sm items-center hover:bg-slate-50 dark:hover:bg-slate-700/50 p-1 rounded">
+                  <span className="col-span-2 text-slate-700 dark:text-slate-200 font-medium truncate" title={k.word}>{k.word}</span>
+                  <span className="text-right text-slate-600 dark:text-slate-400">{k.count}</span>
+                  <span className={`text-right font-medium ${k.density > 2.5 ? 'text-amber-500' : 'text-emerald-600 dark:text-emerald-400'}`}>
                     {k.density}%
                   </span>
                 </div>
               ))}
             </div>
-            <div className="mt-4 pt-4 border-t border-slate-100 text-xs text-slate-500 flex items-center gap-2">
+            <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2">
               <AlertCircle size={12} />
               <span>Aim for 1-2% density for main keywords.</span>
             </div>
@@ -149,7 +149,7 @@ const KeywordDensity: React.FC = () => {
       )}
 
       {/* Content Section for SEO */}
-      <div className="prose prose-slate max-w-none mt-12 bg-slate-50 p-8 rounded-xl">
+      <div className="prose prose-slate dark:prose-invert max-w-none mt-12 bg-slate-50 dark:bg-slate-800/50 p-8 rounded-xl">
         <h3>Why Check Keyword Density?</h3>
         <p>
           Keyword density is the percentage of times a keyword or phrase appears on a web page compared to the total number of words on the page. In the context of SEO, keyword density can be used as a factor to determine whether a web page is relevant to a specified keyword or keyword phrase.

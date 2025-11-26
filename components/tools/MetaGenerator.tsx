@@ -66,13 +66,13 @@ const MetaGenerator: React.FC = () => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {/* Input Section */}
       <div className="space-y-6">
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-slate-800">Configuration</h2>
+            <h2 className="text-xl font-bold text-slate-800 dark:text-white">Configuration</h2>
             <button 
               onClick={handleAiGenerate}
               disabled={loadingAi}
-              className="text-indigo-600 text-sm font-medium hover:text-indigo-800 flex items-center gap-1"
+              className="text-indigo-600 dark:text-indigo-400 text-sm font-medium hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-1"
             >
               <Sparkles size={14} />
               {loadingAi ? 'Generating...' : 'Auto-Fill with AI'}
@@ -82,7 +82,7 @@ const MetaGenerator: React.FC = () => {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-1">
-                <label className="text-sm font-medium text-slate-700">Page Title</label>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Page Title</label>
                 <span className={`text-xs ${state.title.length > 60 ? 'text-red-500' : 'text-slate-400'}`}>
                   {state.title.length}/60
                 </span>
@@ -92,14 +92,14 @@ const MetaGenerator: React.FC = () => {
                 name="title"
                 value={state.title}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
                 placeholder="e.g., Best SEO Tools 2024 - Free Suite"
               />
             </div>
 
             <div>
               <div className="flex justify-between mb-1">
-                <label className="text-sm font-medium text-slate-700">Meta Description</label>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Meta Description</label>
                 <span className={`text-xs ${state.description.length > 160 ? 'text-red-500' : 'text-slate-400'}`}>
                   {state.description.length}/160
                 </span>
@@ -109,25 +109,25 @@ const MetaGenerator: React.FC = () => {
                 value={state.description}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
+                className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none bg-transparent dark:text-white"
                 placeholder="Summarize your page content..."
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium text-slate-700 block mb-1">Keywords (Comma separated)</label>
+              <label className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1">Keywords (Comma separated)</label>
               <input
                 type="text"
                 name="keywords"
                 value={state.keywords}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
                 placeholder="seo, marketing, tools"
               />
             </div>
 
-            <div className="pt-4 border-t border-slate-100">
-              <h3 className="text-sm font-semibold text-slate-900 mb-3">Social Media (Open Graph)</h3>
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-700">
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Social Media (Open Graph)</h3>
               
               <div className="space-y-3">
                 <input
@@ -135,7 +135,7 @@ const MetaGenerator: React.FC = () => {
                   name="ogImage"
                   value={state.ogImage}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-transparent dark:text-white"
                   placeholder="Image URL (e.g. https://example.com/image.jpg)"
                 />
               </div>
@@ -147,12 +147,12 @@ const MetaGenerator: React.FC = () => {
       {/* Preview Section */}
       <div className="space-y-6">
         {/* Google Preview */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
             <Eye size={16} /> Google Search Preview
           </h3>
           
-          <div className="bg-white p-4 max-w-xl">
+          <div className="bg-white p-4 max-w-xl rounded">
             <div className="flex items-center gap-2 text-sm text-slate-800 mb-1 group cursor-pointer">
               <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center text-xs">Fav</div>
               <div className="flex flex-col">
@@ -170,7 +170,7 @@ const MetaGenerator: React.FC = () => {
         </div>
 
         {/* Facebook/Social Preview */}
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
             <Eye size={16} /> Social Share Preview
           </h3>
