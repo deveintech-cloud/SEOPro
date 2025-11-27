@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main Dashboard -->
   <url>
-    <loc>https://seoprosuite.netlify.app/</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -10,31 +10,31 @@
 
   <!-- Tools -->
   <url>
-    <loc>https://seoprosuite.netlify.app/#/keyword-density</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/keyword-density</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/meta-tags</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/meta-tags</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/readability</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/readability</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/backlink</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/backlink</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/seo-audit</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/seo-audit</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -42,25 +42,25 @@
 
   <!-- Pages -->
   <url>
-    <loc>https://seoprosuite.netlify.app/#/upgrade</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/upgrade</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/contact</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/contact</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/privacy</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/privacy</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://seoprosuite.netlify.app/#/terms</loc>
+    <loc>https://USERNAME.github.io/REPO-NAME/#/terms</loc>
     <lastmod>2024-10-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
