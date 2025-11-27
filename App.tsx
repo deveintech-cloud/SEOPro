@@ -22,6 +22,7 @@ const App: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPostType | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Initialize Dark Mode
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -30,9 +31,47 @@ const App: React.FC = () => {
     }
   }, [isDarkMode]);
 
+  // Handle Hash Routing for SEO and Deep Linking
+  useEffect(() => {
+    const handleHashChange = () => {
+      // Get hash and remove the #/ prefix
+      const hash = window.location.hash.replace('#/', '');
+      
+      // Check if hash matches a known tool ID
+      const foundTool = Object.values(ToolId).find(id => id === hash);
+      
+      if (foundTool) {
+        setCurrentTool(foundTool);
+      } else if (hash === '' || hash === '/') {
+        setCurrentTool(ToolId.DASHBOARD);
+      }
+    };
+
+    // Check initial hash on load
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Update URL hash when navigating
+  const handleNavigate = (tool: ToolId) => {
+    setCurrentTool(tool);
+    // Push to history/hash so URL updates (and back button works)
+    window.location.hash = `/${tool}`;
+    // Mobile: Close sidebar on navigate
+    if (window.innerWidth < 768) {
+      setIsSidebarOpen(false);
+    }
+  };
+
   const handleViewPost = (post: BlogPostType) => {
     setSelectedPost(post);
+    // We don't have deep links for specific blog posts in this simple router yet,
+    // so we just set state. In a full app, we'd use /#/blog/slug
     setCurrentTool(ToolId.BLOG_POST);
+    window.scrollTo(0, 0);
   };
 
   const renderTool = () => {
@@ -52,14 +91,14 @@ const App: React.FC = () => {
       case ToolId.TERMS:
         return <TermsOfService />;
       case ToolId.CONTACT:
-        return <Contact onNavigate={setCurrentTool} />;
+        return <Contact onNavigate={handleNavigate} />;
       case ToolId.UPGRADE:
-        return <UpgradePro onNavigate={setCurrentTool} />;
+        return <UpgradePro onNavigate={handleNavigate} />;
       case ToolId.BLOG_POST:
         if (selectedPost) {
-          return <BlogPost post={selectedPost} onBack={() => setCurrentTool(ToolId.DASHBOARD)} />;
+          return <BlogPost post={selectedPost} onBack={() => handleNavigate(ToolId.DASHBOARD)} />;
         }
-        return <Dashboard onNavigate={setCurrentTool} onViewPost={handleViewPost} />;
+        return <Dashboard onNavigate={handleNavigate} onViewPost={handleViewPost} />;
       case ToolId.DASHBOARD:
       default:
         // Placeholder for other tools to show they are "Coming Soon" if navigated to via other means
@@ -84,7 +123,7 @@ const App: React.FC = () => {
                     <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Coming Soon</h2>
                     <p className="text-slate-500 dark:text-slate-400 mt-2">This tool is currently under development.</p>
                     <button 
-                        onClick={() => setCurrentTool(ToolId.DASHBOARD)}
+                        onClick={() => handleNavigate(ToolId.DASHBOARD)}
                         className="mt-6 text-brand-600 dark:text-brand-400 font-medium hover:underline"
                     >
                         Return to Dashboard
@@ -92,7 +131,7 @@ const App: React.FC = () => {
                 </div>
             );
         }
-        return <Dashboard onNavigate={setCurrentTool} onViewPost={handleViewPost} />;
+        return <Dashboard onNavigate={handleNavigate} onViewPost={handleViewPost} />;
     }
   };
 
@@ -127,7 +166,7 @@ const App: React.FC = () => {
       >
         <Sidebar 
           currentTool={currentTool} 
-          onNavigate={setCurrentTool} 
+          onNavigate={handleNavigate} 
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
@@ -192,9 +231,9 @@ const App: React.FC = () => {
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 dark:text-slate-400">
               <p>&copy; 2024 SEOPro Suite. All rights reserved.</p>
               <div className="flex gap-6 mt-4 md:mt-0">
-                <button onClick={() => setCurrentTool(ToolId.PRIVACY)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Privacy Policy</button>
-                <button onClick={() => setCurrentTool(ToolId.TERMS)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Terms of Service</button>
-                <button onClick={() => setCurrentTool(ToolId.CONTACT)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contact</button>
+                <button onClick={() => handleNavigate(ToolId.PRIVACY)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Privacy Policy</button>
+                <button onClick={() => handleNavigate(ToolId.TERMS)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Terms of Service</button>
+                <button onClick={() => handleNavigate(ToolId.CONTACT)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contact</button>
               </div>
             </div>
           </footer>
