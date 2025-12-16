@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { calculateReadabilityMetrics } from '../../services/seoService';
 import { ReadabilityResult } from '../../types';
-import { BookOpen, AlertCircle, CheckCircle, BarChart2 } from 'lucide-react';
+import { BookOpen, AlertCircle, CheckCircle, BarChart2, GraduationCap, Feather } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import AdPlaceholder from '../AdPlaceholder';
 
 const ReadabilityScore: React.FC = () => {
   const [text, setText] = useState('');
@@ -28,11 +29,19 @@ const ReadabilityScore: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Publisher Content: Introduction */}
+      <div className="space-y-4 mb-6">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Readability Score Analyzer</h1>
+        <p className="text-slate-600 dark:text-slate-300 text-lg max-w-3xl leading-relaxed">
+          Improve your content's engagement by ensuring it is easy to read. This tool uses the <strong>Flesch-Kincaid</strong> formula to calculate reading ease and grade level, helping you write clearer, more accessible copy for your audience.
+        </p>
+      </div>
+
       <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Readability Analyzer</h2>
-          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">Free Tool</span>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Input Text</h2>
+          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">Unlimited Checks</span>
         </div>
         
         <textarea
@@ -141,6 +150,46 @@ const ReadabilityScore: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Mid-Content Ad Slot */}
+      <div className="flex justify-center py-4">
+         <AdPlaceholder width={728} height={90} className="hidden md:flex" slotName="Contextual Banner" />
+      </div>
+
+      {/* Educational Guide */}
+      <div className="prose prose-slate dark:prose-invert max-w-none bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-100 dark:border-slate-700">
+         <h2 className="flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white">
+            <GraduationCap className="text-brand-600" /> Understanding Readability Algorithms
+         </h2>
+         <p>
+            Writing for the web is different from writing a novel. Users scan content. High readability scores indicate that your content is accessible to a wider audience, which can lower bounce rates and improve SEO signals.
+         </p>
+         
+         <div className="grid md:grid-cols-2 gap-8 mt-6">
+            <div>
+               <h3 className="text-lg font-bold flex items-center gap-2"><Feather size={18} /> Flesch Reading Ease</h3>
+               <p>
+                  This formula looks at sentence length and the number of syllables per word.
+               </p>
+               <ul className="list-disc pl-5 mt-2 space-y-1">
+                  <li><strong>90-100:</strong> Very Easy (5th Grade)</li>
+                  <li><strong>60-70:</strong> Standard (8th/9th Grade) - <em>Target for Web</em></li>
+                  <li><strong>0-30:</strong> Very Confusing (Academic/Legal)</li>
+               </ul>
+            </div>
+             <div>
+               <h3 className="text-lg font-bold flex items-center gap-2"><CheckCircle size={18} /> How to Improve</h3>
+               <p>
+                  If your score is too low (meaning text is too hard):
+               </p>
+               <ul className="list-disc pl-5 mt-2 space-y-1">
+                  <li>Break long sentences into two.</li>
+                  <li>Replace complex words (e.g., "utilize") with simple ones ("use").</li>
+                  <li>Use bullet points to break up dense paragraphs.</li>
+               </ul>
+            </div>
+         </div>
+      </div>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import ReadabilityScore from './components/tools/ReadabilityScore';
 import PrivacyPolicy from './components/pages/PrivacyPolicy';
 import TermsOfService from './components/pages/TermsOfService';
 import Contact from './components/pages/Contact';
+import AboutUs from './components/pages/AboutUs';
 import UpgradePro from './components/pages/UpgradePro';
 import BlogPost from './components/pages/BlogPost';
 import AdPlaceholder from './components/AdPlaceholder';
@@ -92,6 +93,8 @@ const App: React.FC = () => {
         return <TermsOfService />;
       case ToolId.CONTACT:
         return <Contact onNavigate={handleNavigate} />;
+      case ToolId.ABOUT:
+        return <AboutUs onNavigate={handleNavigate} />;
       case ToolId.UPGRADE:
         return <UpgradePro onNavigate={handleNavigate} />;
       case ToolId.BLOG_POST:
@@ -112,6 +115,7 @@ const App: React.FC = () => {
             ToolId.PRIVACY,
             ToolId.TERMS,
             ToolId.CONTACT,
+            ToolId.ABOUT,
             ToolId.UPGRADE,
             ToolId.BLOG_POST
         ].includes(currentTool)) {
@@ -145,6 +149,7 @@ const App: React.FC = () => {
       case ToolId.PRIVACY: return 'Privacy Policy';
       case ToolId.TERMS: return 'Terms of Service';
       case ToolId.CONTACT: return 'Contact Support';
+      case ToolId.ABOUT: return 'About Us';
       case ToolId.UPGRADE: return 'Upgrade Plan';
       case ToolId.BLOG_POST: return 'Expert Insights';
       default: return 'Dashboard';
@@ -230,7 +235,8 @@ const App: React.FC = () => {
           <footer className="bg-white/60 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 py-8 px-8 mt-auto backdrop-blur-sm transition-colors">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-slate-500 dark:text-slate-400">
               <p>&copy; 2024 SEOPro Suite. All rights reserved.</p>
-              <div className="flex gap-6 mt-4 md:mt-0">
+              <div className="flex flex-wrap gap-6 mt-4 md:mt-0 justify-center">
+                <button onClick={() => handleNavigate(ToolId.ABOUT)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">About Us</button>
                 <button onClick={() => handleNavigate(ToolId.PRIVACY)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Privacy Policy</button>
                 <button onClick={() => handleNavigate(ToolId.TERMS)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Terms of Service</button>
                 <button onClick={() => handleNavigate(ToolId.CONTACT)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contact</button>

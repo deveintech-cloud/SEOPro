@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MetaTagState } from '../../types';
-import { Copy, Eye, RefreshCw, Sparkles } from 'lucide-react';
+import { Copy, Eye, RefreshCw, Sparkles, BookOpen, Search, Share2 } from 'lucide-react';
 import { getSEOSuggestions } from '../../services/geminiService';
+import AdPlaceholder from '../AdPlaceholder';
 
 const MetaGenerator: React.FC = () => {
   const [state, setState] = useState<MetaTagState>({
@@ -32,8 +33,6 @@ const MetaGenerator: React.FC = () => {
     if (!state.title && !state.description) return alert("Please enter at least a topic or partial title first.");
     setLoadingAi(true);
     const suggestion = await getSEOSuggestions(`Title: ${state.title}\nDesc: ${state.description}`, 'meta');
-    // In a real app, we'd parse the JSON response from AI to populate fields. 
-    // Here we'll just show the text result in an alert or separate area for demo simplicity
     alert("AI Suggestion:\n" + suggestion); 
     setLoadingAi(false);
   };
@@ -63,149 +62,192 @@ const MetaGenerator: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Input Section */}
-      <div className="space-y-6">
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-slate-800 dark:text-white">Configuration</h2>
-            <button 
-              onClick={handleAiGenerate}
-              disabled={loadingAi}
-              className="text-indigo-600 dark:text-indigo-400 text-sm font-medium hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-1"
-            >
-              <Sparkles size={14} />
-              {loadingAi ? 'Generating...' : 'Auto-Fill with AI'}
-            </button>
-          </div>
+    <div className="space-y-8">
+      {/* Intro Section - Publisher Content ABOVE Tool */}
+      <div className="space-y-4 mb-6">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Free Meta Tag Generator</h1>
+        <p className="text-slate-600 dark:text-slate-300 text-lg max-w-3xl leading-relaxed">
+          Create optimized Title tags, Meta Descriptions, and Open Graph social cards in seconds. Proper meta tags improve your Click-Through Rate (CTR) from search engines and ensure your links look professional when shared on social media.
+        </p>
+      </div>
 
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-1">
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Page Title</label>
-                <span className={`text-xs ${state.title.length > 60 ? 'text-red-500' : 'text-slate-400'}`}>
-                  {state.title.length}/60
-                </span>
-              </div>
-              <input
-                type="text"
-                name="title"
-                value={state.title}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
-                placeholder="e.g., Best SEO Tools 2024 - Free Suite"
-              />
+      {/* The Tool UI */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="space-y-6">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold text-slate-800 dark:text-white">Configuration</h2>
+              <button 
+                onClick={handleAiGenerate}
+                disabled={loadingAi}
+                className="text-indigo-600 dark:text-indigo-400 text-sm font-medium hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-1"
+              >
+                <Sparkles size={14} />
+                {loadingAi ? 'Generating...' : 'Auto-Fill with AI'}
+              </button>
             </div>
 
-            <div>
-              <div className="flex justify-between mb-1">
-                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Meta Description</label>
-                <span className={`text-xs ${state.description.length > 160 ? 'text-red-500' : 'text-slate-400'}`}>
-                  {state.description.length}/160
-                </span>
-              </div>
-              <textarea
-                name="description"
-                value={state.description}
-                onChange={handleChange}
-                rows={3}
-                className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none bg-transparent dark:text-white"
-                placeholder="Summarize your page content..."
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1">Keywords (Comma separated)</label>
-              <input
-                type="text"
-                name="keywords"
-                value={state.keywords}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
-                placeholder="seo, marketing, tools"
-              />
-            </div>
-
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-700">
-              <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Social Media (Open Graph)</h3>
-              
-              <div className="space-y-3">
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between mb-1">
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Page Title</label>
+                  <span className={`text-xs ${state.title.length > 60 ? 'text-red-500' : 'text-slate-400'}`}>
+                    {state.title.length}/60
+                  </span>
+                </div>
                 <input
                   type="text"
-                  name="ogImage"
-                  value={state.ogImage}
+                  name="title"
+                  value={state.title}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-transparent dark:text-white"
-                  placeholder="Image URL (e.g. https://example.com/image.jpg)"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
+                  placeholder="e.g., Best SEO Tools 2024 - Free Suite"
                 />
               </div>
+
+              <div>
+                <div className="flex justify-between mb-1">
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Meta Description</label>
+                  <span className={`text-xs ${state.description.length > 160 ? 'text-red-500' : 'text-slate-400'}`}>
+                    {state.description.length}/160
+                  </span>
+                </div>
+                <textarea
+                  name="description"
+                  value={state.description}
+                  onChange={handleChange}
+                  rows={3}
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none bg-transparent dark:text-white"
+                  placeholder="Summarize your page content..."
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1">Keywords (Comma separated)</label>
+                <input
+                  type="text"
+                  name="keywords"
+                  value={state.keywords}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-transparent dark:text-white"
+                  placeholder="seo, marketing, tools"
+                />
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-700">
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Social Media (Open Graph)</h3>
+                <div className="space-y-3">
+                  <input
+                    type="text"
+                    name="ogImage"
+                    value={state.ogImage}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-600 rounded-lg text-sm bg-transparent dark:text-white"
+                    placeholder="Image URL (e.g. https://example.com/image.jpg)"
+                  />
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Preview Section */}
+        <div className="space-y-6">
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Eye size={16} /> Google Search Preview
+            </h3>
+            <div className="bg-white p-4 max-w-xl rounded border border-slate-100">
+              <div className="flex items-center gap-2 text-sm text-slate-800 mb-1 group cursor-pointer">
+                <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center text-xs">Fav</div>
+                <div className="flex flex-col">
+                  <span className="text-xs text-slate-900 font-medium">example.com</span>
+                  <span className="text-[10px] text-slate-500">https://www.example.com › tools</span>
+                </div>
+              </div>
+              <h3 className="text-xl text-[#1a0dab] hover:underline cursor-pointer truncate font-normal">
+                {state.title || "Your Page Title Goes Here"}
+              </h3>
+              <p className="text-sm text-slate-600 mt-1 line-clamp-2">
+                {state.description || "Your meta description will appear here. It should be descriptive, engaging, and contain your main keywords to improve click-through rates."}
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Eye size={16} /> Social Share Preview
+            </h3>
+            <div className="border border-slate-200 rounded-lg overflow-hidden max-w-md mx-auto bg-[#f0f2f5]">
+              <div className="h-48 bg-slate-300 w-full flex items-center justify-center overflow-hidden relative">
+                {state.ogImage ? (
+                  <img src={state.ogImage} alt="Preview" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-slate-500 font-medium">1200 x 630 Image</span>
+                )}
+              </div>
+              <div className="p-3 bg-[#f0f2f5] border-t border-slate-200">
+                <p className="text-xs text-slate-500 uppercase">EXAMPLE.COM</p>
+                <h4 className="font-bold text-slate-900 text-sm mt-1 truncate">{state.ogTitle || state.title || "Title"}</h4>
+                <p className="text-xs text-slate-600 mt-1 line-clamp-1">{state.ogDescription || state.description || "Description..."}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 rounded-xl overflow-hidden shadow-lg">
+            <div className="flex justify-between items-center px-4 py-3 bg-slate-800 border-b border-slate-700">
+              <span className="text-xs font-mono text-slate-300">generated_tags.html</span>
+              <button 
+                onClick={copyCode}
+                className="text-xs flex items-center gap-1 text-brand-400 hover:text-brand-300 font-medium transition-colors"
+              >
+                <Copy size={12} /> Copy Code
+              </button>
+            </div>
+            <pre className="p-4 text-xs font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap">
+              {generateCode()}
+            </pre>
           </div>
         </div>
       </div>
 
-      {/* Preview Section */}
-      <div className="space-y-6">
-        {/* Google Preview */}
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
-          <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <Eye size={16} /> Google Search Preview
-          </h3>
-          
-          <div className="bg-white p-4 max-w-xl rounded">
-            <div className="flex items-center gap-2 text-sm text-slate-800 mb-1 group cursor-pointer">
-              <div className="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center text-xs">Fav</div>
-              <div className="flex flex-col">
-                <span className="text-xs text-slate-900 font-medium">example.com</span>
-                <span className="text-[10px] text-slate-500">https://www.example.com › tools</span>
-              </div>
-            </div>
-            <h3 className="text-xl text-[#1a0dab] hover:underline cursor-pointer truncate font-normal">
-              {state.title || "Your Page Title Goes Here"}
-            </h3>
-            <p className="text-sm text-slate-600 mt-1 line-clamp-2">
-              {state.description || "Your meta description will appear here. It should be descriptive, engaging, and contain your main keywords to improve click-through rates."}
-            </p>
-          </div>
-        </div>
+      <div className="flex justify-center py-4">
+         <AdPlaceholder width={728} height={90} className="hidden md:flex" slotName="Banner Ad" />
+      </div>
 
-        {/* Facebook/Social Preview */}
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
-           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <Eye size={16} /> Social Share Preview
-          </h3>
-          
-          <div className="border border-slate-200 rounded-lg overflow-hidden max-w-md mx-auto bg-[#f0f2f5]">
-            <div className="h-48 bg-slate-300 w-full flex items-center justify-center overflow-hidden relative">
-              {state.ogImage ? (
-                <img src={state.ogImage} alt="Preview" className="w-full h-full object-cover" />
-              ) : (
-                <span className="text-slate-500 font-medium">1200 x 630 Image</span>
-              )}
+      {/* Guide Content - Publisher Value */}
+      <div className="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-100 dark:border-slate-700 prose prose-slate dark:prose-invert max-w-none">
+          <h2 className="flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white">
+             <BookOpen className="text-brand-600" /> Guide to Perfect Meta Tags
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+               <h3 className="text-lg font-bold">The Title Tag Strategy</h3>
+               <p>Your Title Tag is the strongest on-page ranking signal. Google typically displays the first 50-60 characters.</p>
+               <ul className="list-disc pl-5">
+                 <li><strong>Keyword Placement:</strong> Put your main keyword near the beginning.</li>
+                 <li><strong>Branding:</strong> Add your brand name at the end (e.g., " | BrandName").</li>
+                 <li><strong>Uniqueness:</strong> Every page on your site needs a unique title.</li>
+               </ul>
             </div>
-            <div className="p-3 bg-[#f0f2f5] border-t border-slate-200">
-              <p className="text-xs text-slate-500 uppercase">EXAMPLE.COM</p>
-              <h4 className="font-bold text-slate-900 text-sm mt-1 truncate">{state.ogTitle || state.title || "Title"}</h4>
-              <p className="text-xs text-slate-600 mt-1 line-clamp-1">{state.ogDescription || state.description || "Description..."}</p>
+             <div>
+               <h3 className="text-lg font-bold">Writing Meta Descriptions</h3>
+               <p>While not a direct ranking factor, the description sells the click.</p>
+               <ul className="list-disc pl-5">
+                 <li><strong>Length:</strong> Keep it between 150-160 characters.</li>
+                 <li><strong>Call to Action:</strong> Use words like "Learn," "Discover," or "Shop."</li>
+                 <li><strong>Relevance:</strong> If the description doesn't match the query, Google will rewrite it.</li>
+               </ul>
             </div>
           </div>
-        </div>
-
-        {/* Code Output */}
-        <div className="bg-slate-900 rounded-xl overflow-hidden shadow-lg">
-          <div className="flex justify-between items-center px-4 py-3 bg-slate-800 border-b border-slate-700">
-            <span className="text-xs font-mono text-slate-300">generated_tags.html</span>
-            <button 
-              onClick={copyCode}
-              className="text-xs flex items-center gap-1 text-brand-400 hover:text-brand-300 font-medium transition-colors"
-            >
-              <Copy size={12} /> Copy Code
-            </button>
+          <div className="mt-8 bg-indigo-50 dark:bg-indigo-900/30 p-6 rounded-lg">
+             <h3 className="font-bold text-indigo-800 dark:text-indigo-300 flex items-center gap-2">
+               <Share2 size={20} /> Open Graph Protocol
+             </h3>
+             <p className="text-sm mt-2 text-indigo-900 dark:text-indigo-200">
+               Don't ignore the OG tags. When someone shares your link on WhatsApp, LinkedIn, or Facebook, these tags determine the image and headline they see. A broken image preview can reduce social traffic by up to 60%.
+             </p>
           </div>
-          <pre className="p-4 text-xs font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap">
-            {generateCode()}
-          </pre>
-        </div>
       </div>
     </div>
   );

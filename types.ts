@@ -21,6 +21,7 @@ export enum ToolId {
   CONTACT = 'contact',
   PRIVACY = 'privacy',
   TERMS = 'terms',
+  ABOUT = 'about',
   UPGRADE = 'upgrade',
   BLOG_POST = 'blog-post'
 }

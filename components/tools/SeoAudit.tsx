@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { analyzeSeoHtml } from '../../services/seoService';
 import { SeoAuditResult } from '../../types';
-import { Activity, CheckCircle, XCircle, AlertTriangle, Code, ArrowRight, Lightbulb } from 'lucide-react';
+import { Activity, CheckCircle, XCircle, AlertTriangle, ArrowRight, Lightbulb, Search, Code, Layout } from 'lucide-react';
+import AdPlaceholder from '../AdPlaceholder';
 
 const SeoAudit: React.FC = () => {
   const [mode, setMode] = useState<'url' | 'source'>('url');
@@ -15,16 +16,11 @@ const SeoAudit: React.FC = () => {
 
     setLoading(true);
     
-    // In a real app with backend, we'd fetch the URL here.
-    // Client-side, we can only really analyze pasted source properly due to CORS.
-    // We will simulate a fetch for URL mode for demo purposes, or analyze the text if it looks like HTML.
-    
+    // Simulation logic for demo
     setTimeout(() => {
       let analysisInput = input;
       
       if (mode === 'url') {
-         // Mock HTML content for the simulation if they entered a URL
-         // This ensures the demo always "works"
          analysisInput = `
             <html>
                 <head>
@@ -48,10 +44,18 @@ const SeoAudit: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Intro Content */}
+      <div className="space-y-4 mb-6">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">On-Page SEO Audit Tool</h1>
+        <p className="text-slate-600 dark:text-slate-300 text-lg max-w-3xl leading-relaxed">
+          Instantly check your webpage for common technical SEO issues. We analyze your HTML tags, image attributes, and load performance to identify why your site might be ranking lower than it should.
+        </p>
+      </div>
+
       <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-white">On-Page SEO Audit</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Run Audit</h2>
           
           <div className="flex bg-slate-100 dark:bg-slate-700 p-1 rounded-lg">
             <button
@@ -178,7 +182,6 @@ const SeoAudit: React.FC = () => {
                                 </h4>
                                 <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">{issue.details}</p>
                                 
-                                {/* Solution / Recommendation Section */}
                                 {issue.recommendation && (
                                     <div className="mt-3 flex items-start gap-2 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-md border border-blue-100 dark:border-blue-900/50">
                                         <Lightbulb className="text-blue-500 dark:text-blue-400 shrink-0 mt-0.5" size={16} />
@@ -193,14 +196,41 @@ const SeoAudit: React.FC = () => {
                     </div>
                 ))}
             </div>
-             <div className="p-4 bg-slate-50 dark:bg-slate-800/50 text-center">
-                <button className="text-brand-600 dark:text-brand-400 text-sm font-medium hover:underline flex items-center justify-center gap-1 mx-auto">
-                    Download PDF Report <ArrowRight size={14} />
-                </button>
-            </div>
           </div>
         </div>
       )}
+
+      {/* Mid-Page Ad Slot */}
+      <div className="flex justify-center py-4">
+         <AdPlaceholder width={728} height={90} className="hidden md:flex" slotName="Audit Banner" />
+      </div>
+
+      {/* Guide Content */}
+      <div className="bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-100 dark:border-slate-700 prose prose-slate dark:prose-invert max-w-none">
+          <h2 className="flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white">
+             <Layout className="text-brand-600" /> Technical SEO Checklist
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 mt-6">
+            <div>
+               <h3 className="text-lg font-bold flex items-center gap-2"><Code size={18} /> HTML Tags</h3>
+               <p>Search engines rely on semantic HTML to understand content hierarchy.</p>
+               <ul className="list-disc pl-5 mt-2 space-y-1">
+                  <li><strong>H1 Tag:</strong> Must exist and be unique (one per page).</li>
+                  <li><strong>Alt Text:</strong> Required for accessibility and Image SEO.</li>
+                  <li><strong>Meta Description:</strong> Should be between 120-160 characters.</li>
+               </ul>
+            </div>
+             <div>
+               <h3 className="text-lg font-bold flex items-center gap-2"><Activity size={18} /> Performance</h3>
+               <p>Page speed is a confirmed ranking factor since 2010.</p>
+               <ul className="list-disc pl-5 mt-2 space-y-1">
+                  <li><strong>LCP:</strong> Main content should load in under 2.5s.</li>
+                  <li><strong>CLS:</strong> Elements shouldn't shift while loading.</li>
+                  <li><strong>Mobile:</strong> Ensure touch targets are large enough.</li>
+               </ul>
+            </div>
+          </div>
+      </div>
     </div>
   );
 };
