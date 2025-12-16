@@ -3,7 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { calculateKeywordDensity } from '../../services/seoService';
 import { getSEOSuggestions } from '../../services/geminiService';
 import { KeywordData } from '../../types';
-import { Download, Copy, Sparkles, AlertCircle } from 'lucide-react';
+import { Download, Copy, Sparkles, AlertCircle, BookOpen, Target, Layers } from 'lucide-react';
+import AdPlaceholder from '../AdPlaceholder';
 
 const KeywordDensity: React.FC = () => {
   const [text, setText] = useState('');
@@ -34,16 +35,25 @@ const KeywordDensity: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Intro Section for AdSense Content Policy */}
+      <div className="space-y-2 mb-6">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Free Keyword Density Checker</h1>
+        <p className="text-slate-600 dark:text-slate-300 text-lg max-w-3xl">
+          Analyze your text for optimal keyword frequency. Identify keyword stuffing risks and uncover opportunities to improve semantic relevance for better search rankings.
+        </p>
+      </div>
+
+      {/* The Tool Interface */}
       <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Keyword Density Checker</h2>
-          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">Free Tool</span>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-white">Input Content</h2>
+          <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">Unlimited Use</span>
         </div>
         
         <textarea
-          className="w-full h-48 p-4 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none resize-none text-slate-700 dark:text-slate-200 placeholder-slate-400 bg-transparent transition-shadow"
-          placeholder="Paste your content here to analyze keyword density..."
+          className="w-full h-48 p-4 border border-slate-200 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none resize-none text-slate-700 dark:text-slate-200 placeholder-slate-400 bg-transparent transition-shadow font-mono text-sm"
+          placeholder="Paste your article, blog post, or website copy here..."
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
@@ -75,6 +85,7 @@ const KeywordDensity: React.FC = () => {
         </div>
       </div>
 
+      {/* Results Section */}
       {aiTip && (
         <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-slate-800 dark:to-slate-800 p-6 rounded-xl border border-indigo-100 dark:border-indigo-900 animate-in fade-in slide-in-from-bottom-4">
           <div className="flex items-start gap-3">
@@ -89,7 +100,6 @@ const KeywordDensity: React.FC = () => {
 
       {results && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-8">
-          {/* Main Chart */}
           <div className="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
             <div className="flex justify-between items-center mb-6">
               <h3 className="font-semibold text-slate-800 dark:text-white">Top Keyword Distribution</h3>
@@ -111,7 +121,6 @@ const KeywordDensity: React.FC = () => {
             </div>
           </div>
 
-          {/* Detailed List */}
           <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col h-[24rem]">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-semibold text-slate-800 dark:text-white">Keyword Stats</h3>
@@ -148,19 +157,79 @@ const KeywordDensity: React.FC = () => {
         </div>
       )}
 
-      {/* Content Section for SEO */}
-      <div className="prose prose-slate dark:prose-invert max-w-none mt-12 bg-slate-50 dark:bg-slate-800/50 p-8 rounded-xl">
-        <h3>Why Check Keyword Density?</h3>
-        <p>
-          Keyword density is the percentage of times a keyword or phrase appears on a web page compared to the total number of words on the page. In the context of SEO, keyword density can be used as a factor to determine whether a web page is relevant to a specified keyword or keyword phrase.
-        </p>
-        <h4>Best Practices:</h4>
-        <ul>
-          <li>Avoid "Keyword Stuffing" - it can lead to search penalties.</li>
-          <li>Focus on natural language and readability first.</li>
-          <li>Use Latent Semantic Indexing (LSI) keywords (synonyms and related terms).</li>
-          <li>Keep your primary keyword density between 1% and 2%.</li>
-        </ul>
+      {/* Mid-Page Ad Placeholder - Contextual Placement */}
+      <div className="flex justify-center py-4">
+         <AdPlaceholder width={728} height={90} className="hidden md:flex" slotName="Mid-Content Banner" />
+      </div>
+
+      {/* REQUIRED PUBLISHER CONTENT: Detailed Guide & Educational Material */}
+      <div className="prose prose-slate dark:prose-invert max-w-none bg-white dark:bg-slate-800/50 p-8 rounded-xl border border-slate-100 dark:border-slate-700">
+        <h2 className="flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white">
+          <BookOpen className="text-brand-600" size={24} /> 
+          Complete Guide to Keyword Density
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-12 mt-8">
+          <div>
+            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-3">What is Keyword Density?</h3>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+              Keyword density is a foundational concept in Search Engine Optimization (SEO). It refers to the percentage of times a specific keyword or phrase appears on a webpage compared to the total number of words on that page.
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+              Formula: <code>(Keyword Count / Total Word Count) * 100</code>
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+              While search engines like Google have evolved beyond simple keyword matching, density remains a crucial metric for ensuring your content stays <strong>topically relevant</strong> without crossing the line into spam.
+            </p>
+          </div>
+          
+          <div className="bg-slate-50 dark:bg-slate-800 p-6 rounded-lg">
+            <h3 className="font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+              <Target size={20} className="text-red-500" /> 
+              The Dangers of Keyword Stuffing
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+              In the early 2000s, repeating a keyword 50 times helped you rank. Today, algorithms like Google Panda penalize this practice heavily.
+            </p>
+            <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li className="flex gap-2">
+                <span className="text-red-500 font-bold">✗</span> 
+                <span>Reading experience becomes unnatural and robotic.</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-red-500 font-bold">✗</span> 
+                <span>Search engines flag the page as "Low Quality".</span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-red-500 font-bold">✗</span> 
+                <span>Increases bounce rate as users leave quickly.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12">
+            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
+                <Layers size={22} className="text-brand-600" />
+                Advanced Strategy: TF-IDF and LSI
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                Modern SEO isn't about repeating the same word. It's about <strong>Semantic Relevance</strong>. This is where TF-IDF (Term Frequency-Inverse Document Frequency) and LSI (Latent Semantic Indexing) come into play.
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Instead of using "Coffee Shop" 20 times, use related terms like "Barista," "Espresso," "Beans," and "Wifi." Google's BERT and RankBrain algorithms look for these context clusters to understand if your content is truly comprehensive. Our tool helps you visualize your dominant terms so you can diversify your vocabulary.
+            </p>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700">
+            <h4 className="font-bold text-slate-900 dark:text-white mb-2">How to use this tool effectively:</h4>
+            <ol className="list-decimal pl-5 space-y-2 text-slate-600 dark:text-slate-300">
+                <li>Paste your draft content into the text area above.</li>
+                <li>Aim for a primary keyword density of <strong>1% to 2%</strong>.</li>
+                <li>Check the "Top Keywords" list. Are filler words (like "very", "really") appearing too often? Remove them to tighten your copy.</li>
+                <li>Use the <strong>AI Optimization</strong> button to get suggestions on related keywords you might have missed.</li>
+            </ol>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
 import { generateMockBacklinkData } from '../../services/seoService';
 import { BacklinkData } from '../../types';
-import { Search, Globe, Shield, AlertTriangle, Link as LinkIcon, Download, Lock, TrendingUp, ExternalLink, Copy, Check } from 'lucide-react';
+import { Search, Globe, Shield, AlertTriangle, Link as LinkIcon, Download, Lock, TrendingUp, ExternalLink, Copy, Check, BarChart2, AlertOctagon } from 'lucide-react';
+import AdPlaceholder from '../AdPlaceholder';
 
 const BacklinkChecker: React.FC = () => {
   const [url, setUrl] = useState('');
@@ -48,7 +49,15 @@ const BacklinkChecker: React.FC = () => {
   const COLORS = ['#0d9488', '#cbd5e1'];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+       {/* Intro Section */}
+      <div className="space-y-2 mb-2">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Free Backlink Checker</h1>
+        <p className="text-slate-600 dark:text-slate-300 text-lg max-w-3xl">
+          Check the domain authority and backlink profile of any website. Discover who links to your competitors and identify opportunities to build high-quality inbound links.
+        </p>
+      </div>
+
       {/* Input Section */}
       <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
         <div className="flex justify-between items-center mb-6">
@@ -282,6 +291,44 @@ const BacklinkChecker: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* AdSense Publisher Content Wrapper */}
+      <div className="mt-12 bg-white dark:bg-slate-800 p-8 rounded-xl border border-slate-100 dark:border-slate-700 prose prose-slate dark:prose-invert max-w-none">
+         <h2 className="flex items-center gap-2 text-2xl font-bold text-slate-900 dark:text-white">
+             <BarChart2 className="text-brand-600" />
+             Understanding Backlink Metrics
+         </h2>
+         
+         <div className="grid md:grid-cols-2 gap-8 mt-6">
+             <div>
+                 <h3 className="font-bold text-lg text-slate-800 dark:text-white">What is Domain Authority (DA)?</h3>
+                 <p className="text-slate-600 dark:text-slate-300">
+                     Domain Authority is a search engine ranking score developed by Moz that predicts how likely a website is to rank on search engine result pages (SERPs). It ranges from 1 to 100, with higher scores corresponding to a greater ability to rank.
+                 </p>
+             </div>
+             <div>
+                 <h3 className="font-bold text-lg text-slate-800 dark:text-white">DoFollow vs NoFollow</h3>
+                 <p className="text-slate-600 dark:text-slate-300">
+                     <strong>DoFollow</strong> links pass "link juice" and authority to your site, directly helping SEO. <strong>NoFollow</strong> links (often from social media or comments) do not pass authority but still drive traffic and brand awareness. A natural profile needs both.
+                 </p>
+             </div>
+         </div>
+
+         <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg border border-red-100 dark:border-red-900/50 mt-8">
+             <h3 className="text-lg font-bold text-red-700 dark:text-red-400 flex items-center gap-2">
+                 <AlertOctagon size={20} />
+                 Warning: High Spam Score
+             </h3>
+             <p className="text-slate-700 dark:text-slate-300 mt-2">
+                 If your Spam Score is above 5%, you may be at risk of a Google Penalty. Common causes include:
+             </p>
+             <ul className="list-disc pl-5 mt-2 space-y-1 text-slate-700 dark:text-slate-300">
+                 <li>Links from low-quality directories or link farms.</li>
+                 <li>A low ratio of branded anchor text (e.g., overly optimized anchors like "cheap shoes").</li>
+                 <li>Thin content on the linking pages.</li>
+             </ul>
+         </div>
+      </div>
     </div>
   );
 };
